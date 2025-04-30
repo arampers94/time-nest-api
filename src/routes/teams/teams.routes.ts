@@ -11,7 +11,7 @@ import {
 
 export const router: express.Router = express.Router();
 
-router.route("/by-organization-id").get(getTeamsByOrganizationId);
+router.route("/organization/:organizationId").get(getTeamsByOrganizationId);
 router.route("/team/:id").get(getTeamById);
 router.route("/team").post(createTeam);
 router.route("/team/:id").put(updateTeamDetails);

@@ -10,7 +10,7 @@ export const getTeamsByOrganizationId = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { organizationId } = req.query;
+    const { organizationId } = req.params;
     const teams = await teamsService.getTeamsByOrganizationId(
       parseInt(organizationId as string, 10)
     );

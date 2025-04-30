@@ -9,7 +9,7 @@ export const getUsersByOrganizationId = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { organizationId } = req.query;
+    const { organizationId } = req.params;
     const users = await usersService.getUsersByOrganizationId(
       parseInt(organizationId as string, 10)
     );
@@ -25,7 +25,7 @@ export const getUserById = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const { id } = req.query;
+    const { id } = req.params;
     const user = await usersService.getUserById(parseInt(id as string, 10));
     if (!user) {
       res.status(404).json({ message: "User not found" });
