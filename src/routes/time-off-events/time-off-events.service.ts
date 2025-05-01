@@ -26,6 +26,9 @@ export class TimeOffEventsService {
           gte: new Date(),
         },
       },
+      include: {
+        user: true,
+      },
     });
     return timeOffEvents;
   };
@@ -38,6 +41,9 @@ export class TimeOffEventsService {
         start_date: {
           gte: new Date(),
         },
+      },
+      include: {
+        user: true,
       },
     });
     return timeOffEvents;
