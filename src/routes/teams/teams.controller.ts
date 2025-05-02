@@ -40,6 +40,23 @@ export const getTeamById = async (
   }
 };
 
+export const getTeamsByUserId = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { userId } = req.params;
+    const teams = await teamsService.getTeamsByUserId(
+      parseInt(userId as string, 10)
+    );
+    res.status(200).json(teams);
+  } catch (error) {
+    res.status(400).json({ message: "Error fetching teams" });
+    next(error);
+  }
+};
+
 export const createTeam = async (
   req: Request,
   res: Response,

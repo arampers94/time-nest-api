@@ -25,6 +25,20 @@ export class TeamsService {
     return team;
   };
 
+  public getTeamsByUserId = async (userId: number) => {
+    const teams = await prisma.team.findMany({
+      where: {
+        users: {
+          some: {
+            id: userId,
+          },
+        },
+        deleted_date: null,
+      },
+    });
+    return teams;
+  };
+
   public createTeam = async (payload: CreateTeamPayload) => {
     const team = await prisma.team.create({
       data: {
