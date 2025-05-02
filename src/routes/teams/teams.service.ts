@@ -16,6 +16,10 @@ export class TeamsService {
     const team = await prisma.team.findUnique({
       where: {
         id: teamId,
+        deleted_date: null,
+      },
+      include: {
+        users: true,
       },
     });
     return team;
