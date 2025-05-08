@@ -49,6 +49,38 @@ export class TimeOffEventsService {
     return timeOffEvents;
   };
 
+  public getTimeOffEventsByMonthAndYearByTeamId = async (
+    teamId: number,
+    month: string,
+    year: string
+  ) => {
+    const givenDate = new Date(`${year}-${month}-01`);
+    const firstDayOfPreviousMonth = new Date(givenDate);
+    firstDayOfPreviousMonth.setMonth(givenDate.getMonth() - 1);
+    firstDayOfPreviousMonth.setDate(1);
+
+    const lastDayOfNextMonth = new Date(givenDate);
+    lastDayOfNextMonth.setMonth(givenDate.getMonth() + 2);
+    lastDayOfNextMonth.setDate(0);
+
+    const timeOffEvents = await prisma.timeOffEvent.findMany({
+      where: {
+        team_id: teamId,
+        deleted_date: null,
+        start_date: {
+          gte: firstDayOfPreviousMonth,
+        },
+        end_date: {
+          lte: lastDayOfNextMonth,
+        },
+      },
+      include: {
+        user: true,
+      },
+    });
+    return timeOffEvents;
+  };
+
   public createTimeOffEvent = async (payload: CreateTimeOffEventPayload) => {
     const timeOffEvent = await prisma.timeOffEvent.create({
       data: {

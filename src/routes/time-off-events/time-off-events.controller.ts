@@ -64,6 +64,27 @@ export const getFutureTimeOffEventsByTeamId = async (
   }
 };
 
+export const getTimeOffEventsByMonthAndYearByTeamId = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  try {
+    const { teamId } = req.params;
+    const { month, year } = req.body;
+    const timeOffEvents =
+      await timeOffEventsService.getTimeOffEventsByMonthAndYearByTeamId(
+        parseInt(teamId as string, 10),
+        month as string,
+        year as string
+      );
+    res.status(200).json(timeOffEvents);
+  } catch (error) {
+    res.status(400).json({ message: "Error fetching time off events" });
+    next(error);
+  }
+};
+
 export const createTimeOffEvent = async (
   req: Request,
   res: Response,
