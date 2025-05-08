@@ -64,7 +64,7 @@ export const getFutureTimeOffEventsByTeamId = async (
   }
 };
 
-export const getTimeOffEventsByMonthAndYearByTeamId = async (
+export const getCalendarTimeOffEventsByTeamId = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -73,7 +73,7 @@ export const getTimeOffEventsByMonthAndYearByTeamId = async (
     const { teamId } = req.params;
     const { month, year } = req.body;
     const timeOffEvents =
-      await timeOffEventsService.getTimeOffEventsByMonthAndYearByTeamId(
+      await timeOffEventsService.getCalendarTimeOffEventsByTeamId(
         parseInt(teamId as string, 10),
         month as string,
         year as string

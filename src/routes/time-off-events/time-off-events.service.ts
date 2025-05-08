@@ -49,7 +49,7 @@ export class TimeOffEventsService {
     return timeOffEvents;
   };
 
-  public getTimeOffEventsByMonthAndYearByTeamId = async (
+  public getCalendarTimeOffEventsByTeamId = async (
     teamId: number,
     month: string,
     year: string

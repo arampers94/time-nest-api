@@ -3,7 +3,7 @@ import {
   getTimeOffEventById,
   getCurrentTimeOffEventsByTeamId,
   getFutureTimeOffEventsByTeamId,
-  getTimeOffEventsByMonthAndYearByTeamId,
+  getCalendarTimeOffEventsByTeamId,
   createTimeOffEvent,
   updateTimeOffEvent,
   deleteTimeOffEvent,
@@ -14,9 +14,7 @@ export const router: express.Router = express.Router();
 router.route("/:id").get(getTimeOffEventById);
 router.route("/current/:teamId").get(getCurrentTimeOffEventsByTeamId);
 router.route("/future/:teamId").get(getFutureTimeOffEventsByTeamId);
-router
-  .route("/month-and-year/:teamId")
-  .get(getTimeOffEventsByMonthAndYearByTeamId);
+router.route("/calendar/:teamId").get(getCalendarTimeOffEventsByTeamId);
 router.route("/").post(createTimeOffEvent);
 router.route("/:id").put(updateTimeOffEvent);
 router.route("/:id").delete(deleteTimeOffEvent);
