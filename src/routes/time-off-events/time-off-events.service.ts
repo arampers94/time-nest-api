@@ -51,10 +51,10 @@ export class TimeOffEventsService {
 
   public getCalendarTimeOffEventsByTeamId = async (
     teamId: number,
-    month: string,
+    month: number,
     year: string
   ) => {
-    const givenDate = new Date(`${year}-${month}-01`);
+    const givenDate = new Date(`${year}-${month.toString()}-01`);
     const firstDayOfPreviousMonth = new Date(givenDate);
     firstDayOfPreviousMonth.setMonth(givenDate.getMonth() - 1);
     firstDayOfPreviousMonth.setDate(1);

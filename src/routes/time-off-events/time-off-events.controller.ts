@@ -71,12 +71,15 @@ export const getCalendarTimeOffEventsByTeamId = async (
 ): Promise<void> => {
   try {
     const { teamId } = req.params;
-    const { month, year } = req.body;
+    const { month, year } = req.query as unknown as {
+      month: number;
+      year: string;
+    };
     const timeOffEvents =
       await timeOffEventsService.getCalendarTimeOffEventsByTeamId(
         parseInt(teamId as string, 10),
-        month as string,
-        year as string
+        month,
+        year
       );
     res.status(200).json(timeOffEvents);
   } catch (error) {
