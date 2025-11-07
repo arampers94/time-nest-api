@@ -61,8 +61,6 @@ model Team {
   created_date   DateTime      @default(now())
   updated_date   DateTime      @updatedAt
   deleted_date   DateTime?
-
-  TimeOffEvent TimeOffEvent[]
 }
 
 model TimeOffEvent {
@@ -74,8 +72,6 @@ model TimeOffEvent {
   end_date     DateTime
   start_time   String?
   end_time     String?
-  team         Team      @relation(fields: [team_id], references: [id])
-  team_id      Int
   user         User      @relation(fields: [user_id], references: [id])
   user_id      Int
   created_date DateTime  @default(now())
