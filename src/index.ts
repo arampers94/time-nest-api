@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import { router } from "./routes";
 import cors = require("cors");
 import bodyParser = require("body-parser");
+import { createClient } from "@supabase/supabase-js";
 
 declare global {
   namespace Express {
@@ -11,24 +12,17 @@ declare global {
   }
 }
 
-const { auth } = require("express-openid-connect");
 const { requiresAuth } = require("express-openid-connect");
 const app: Application = express();
 const port = 3000;
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  secret: process.env.AUTH0_SECRET,
-  baseURL: process.env.AUTH0_BASE_URL,
-  clientID: process.env.AUTH0_CLIENT_ID,
-  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
-};
+
+const supabaseUrl = process.env.SUPABASE_URL as string;
+const supabaseKey = process.env.SUPABASE_PUBLISHABLE_KEY as string;
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
 
 app.use(cors());
 app.use(bodyParser.json());
-
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-app.use(auth(config));
 
 // register application routes
 app.use("/api", router);

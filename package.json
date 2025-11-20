@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.6.0",
+    "@supabase/supabase-js": "^2.84.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "express-openid-connect": "^2.18.1"
