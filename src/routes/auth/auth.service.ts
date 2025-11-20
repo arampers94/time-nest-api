@@ -1,19 +1,24 @@
+import { supabase } from "../..";
+
 export class AuthService {
-  public async login(email: string, password: string) {
-    // Implement your login logic here
-    // For example, check the email and password against the database
+  public async signIn(email: string, password: string) {
+    await supabase.auth.signInWithPassword({ email, password });
     return { message: "Login successful" };
   }
 
-  public async register(email: string, password: string) {
-    // Implement your registration logic here
-    // For example, create a new user in the database
+  public async signUp(email: string, password: string) {
+    await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: "http://localhost:4200/home",
+      },
+    });
     return { message: "Registration successful" };
   }
 
-  public async logout() {
-    // Implement your logout logic here
-    // For example, invalidate the user's session or token
+  public async signOut() {
+    await supabase.auth.signOut();
     return { message: "Logout successful" };
   }
 }
